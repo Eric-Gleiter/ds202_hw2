@@ -35,9 +35,11 @@ numPerfect
 ```
 there are 44 perfect squares between 1 and 2001
 
-*Cars and Mileage*
+**Cars and Mileage**
 ```{r}
-
+if (!require("ggplot2")) {
+install.packages("ggplot2")
+}
 library(ggplot2)
 ```
 
@@ -82,7 +84,9 @@ mpgcopy$fuel <- (mpgcopy$cty + mpgcopy$hwy)/2
 year <- mpgcopy$year
 plot(year, mpgcopy$fuel)
 
-
+if (!require("psych")) {
+install.packages("psych")
+}
 library(psych)
 describeBy(mpgcopy$fuel, mpgcopy$year)
 ```

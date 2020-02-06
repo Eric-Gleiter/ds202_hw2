@@ -1,0 +1,90 @@
+---
+title: "Homework 2"
+author: "Eric Gleiter: Github- Eric-Gleiter"
+date: "2/3/2020"
+output: html_document
+---
+
+Question 1) 
+```{r}
+    cel = c(-4.44444,-9.44444)
+    cel
+```
+
+Question 2)
+```{r}
+vector = c(1,3)
+for (i in 3:200)
+{
+  if (i%%2 == 1)
+  {
+    vector = c(vector,1)
+  }
+  else
+  {
+    vector = c(vector,3)
+  }
+}
+vector
+```
+
+Question 3)
+```{r}
+numPerfect = floor(sqrt(2001))
+numPerfect
+```
+there are 44 perfect squares between 1 and 2001
+
+*Cars and Mileage*
+```{r}
+
+library(ggplot2)
+```
+
+Question 1)
+```{r}
+mpgcopy <- mpg
+hwympg <- mpgcopy$hwy
+mpgcopy <- mpgcopy[order(hwympg),]
+top3 <- tail(mpgcopy,3)
+top3
+```
+The top3 three are the jetta and new beetle (auto and manual) I found this by sorting the data frame by the highway mileage and then pulling out the 3 best mileages.
+
+Question 2)
+```{r}
+compacts <- mpgcopy$class
+numCompact <- 0
+for (i in 1:length(compacts))
+{
+  if (compacts[i] == 'compact')
+  {
+    numCompact <- numCompact +1
+  }
+}
+numCompact
+```
+There are 47 compact models in this data set
+
+
+Question 3)
+```{r}
+ctympg <- mpgcopy$cty
+plot(ctympg, hwympg)
+
+```
+
+When I plotted the two, I was able to see a large amounts of points however I assumed the reason some people would not see a lot of points would be if points overlapped as in multiple points in one location. Additionally when looking at this plot I believe there is a very slight trend upwards suggesting that cty and hwy mpg are positively correlated.
+
+Question 4)
+```{r}
+mpgcopy$fuel <- (mpgcopy$cty + mpgcopy$hwy)/2
+year <- mpgcopy$year
+plot(year, mpgcopy$fuel)
+
+
+library(psych)
+describeBy(mpgcopy$fuel, mpgcopy$year)
+```
+
+First In order to compare fuel I used the average of the highway (hwy) and the city (city) fuel efficiencies. Looking at the graph we see what appears to be more cars having a higher fuel efficiency in 1999 suggested by the outliers. However looking at the summary statistics we can see the difference in means is very small with a very similar spread this suggest that there is not significant difference in the fuel efficiency of the two types of cars a t-test would most likely confirm this hypothesis.

@@ -1,9 +1,10 @@
 ---
 title: "Homework 2"
-author: "Eric Gleiter: Github- Eric-Gleiter"
+author: "Eric Gleiter; Github: Eric-Gleiter"
 date: "2/3/2020"
 output: html_document
 ---
+*Note: All package checks and installations code is hidden on the html* 
 
 Question 1) 
 ```{r}
@@ -36,10 +37,14 @@ numPerfect
 there are 44 perfect squares between 1 and 2001
 
 **Cars and Mileage**
-```{r}
+```{r echo=FALSE, results='hide', message=FALSE}
 if (!require("ggplot2")) {
 install.packages("ggplot2")
 }
+if (!require("psych")) {
+install.packages("psych")
+}
+library(psych)
 library(ggplot2)
 ```
 
@@ -71,24 +76,19 @@ There are 47 compact models in this data set
 
 Question 3)
 ```{r}
-ctympg <- mpgcopy$cty
-plot(ctympg, hwympg)
-
+plot(mpgcopy$cty, mpgcopy$hwy,ylab = "Highway mpg", xlab = "City Mpg" )
 ```
 
-When I plotted the two, I was able to see a large amounts of points however I assumed the reason some people would not see a lot of points would be if points overlapped as in multiple points in one location. Additionally when looking at this plot I believe there is a very slight trend upwards suggesting that cty and hwy mpg are positively correlated.
+The reason there is only a few points showing is two fold. The first being that if two points overlap only one point would be shown, and the other being that there might be null values in one set or the other which would lead to that row being excluded in the plot. Additionally when looking at this plot I believe there is strong trend upwards suggesting that cty and hwy mpg are positively correlated.
 
 Question 4)
+
 ```{r}
 mpgcopy$fuel <- (mpgcopy$cty + mpgcopy$hwy)/2
 year <- mpgcopy$year
-plot(year, mpgcopy$fuel)
+plot(year, mpgcopy$fuel, ylab = "Fuel Effiency", xlab="Model Year")
 
-if (!require("psych")) {
-install.packages("psych")
-}
-library(psych)
 describeBy(mpgcopy$fuel, mpgcopy$year)
 ```
 
-First In order to compare fuel I used the average of the highway (hwy) and the city (city) fuel efficiencies. Looking at the graph we see what appears to be more cars having a higher fuel efficiency in 1999 suggested by the outliers. However looking at the summary statistics we can see the difference in means is very small with a very similar spread this suggest that there is not significant difference in the fuel efficiency of the two types of cars a t-test would most likely confirm this hypothesis.
+First In order to compare fuel I used the average of the highway (hwy) and the city (city) fuel efficiencies. Looking at the graph we see what appears to be more cars having a higher fuel efficiency in 1999 suggested by the outliers (a box plot might have been more helpful but since I also include the descriptive statistics for each group I left it out). However, looking at the summary statistics we can see the difference in means is very small with a very similar spread this suggest that there is not significant difference in the fuel efficiency of the two types of cars a t-test would most likely confirm this hypothesis.
